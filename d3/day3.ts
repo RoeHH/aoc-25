@@ -9,22 +9,22 @@ try {
 818181911112111`;
 }
 
-const part1= () => {
+const part1 = () => {
   let result = 0;
   for (const row of input.split("\n")) {
-    let [ tens, ones ] = [0,0];
+    let [tens, ones] = [0, 0];
     for (const [i, digit] of row.split("").map(Number).entries()) {
-      if(digit > tens && i !== row.length-1) {
+      if (digit > tens && i !== row.length - 1) {
         tens = digit;
         ones = 0;
-      } else if(digit > ones) {
+      } else if (digit > ones) {
         ones = digit;
       }
     }
     result += Number(`${tens}${ones}`);
   }
   return result;
-}
+};
 
 const part2 = (n: number) => {
   let result = 0;
@@ -32,21 +32,21 @@ const part2 = (n: number) => {
     const digits = new Array(n).fill(0);
     for (const [i, number] of row.split("").map(Number).entries()) {
       let found = false;
-      for (const [j, digit] of digits.entries()) {   
-        if(digits.length-(row.length-i) > j) {
+      for (const [j, digit] of digits.entries()) {
+        if (digits.length - (row.length - i) > j) {
           continue;
-        } else if(found) {
-          digits[j] = 0
-        } else if(digit < number) {
+        } else if (found) {
+          digits[j] = 0;
+        } else if (digit < number) {
           digits[j] = number;
-          found = true        
+          found = true;
         }
       }
-    } 
-    result += Number(digits.join(''));
+    }
+    result += Number(digits.join(""));
   }
-  return result
-}
+  return result;
+};
 
 console.log(`Result part 1: ${part1()}`);
 
@@ -56,10 +56,10 @@ Deno.bench("Day 3 part 1", () => {
 
 console.log(`Result part 2: ${part2(12)}`);
 
-for (const i of [1,2,3,4,5,6,7,8,9,10]) {
+for (const i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) {
   Deno.bench(`Day 3 part 2 with n=${i}`, () => {
     part2(i);
-  })
+  });
 }
 
 /*

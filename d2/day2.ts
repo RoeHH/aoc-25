@@ -3,14 +3,14 @@ try {
   input = await Deno.readTextFile("d2/day2.input");
 } catch (_error) {
   console.error("Cant read input will use test input");
-  input = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
+  input =
+    "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
 }
 
 const solve = (input: string, regex: RegExp): number => {
-
-  const ranges = input.split(",").map(range => {
+  const ranges = input.split(",").map((range) => {
     const [start, end] = range.split("-").map(Number);
-    return {start, end};
+    return { start, end };
   });
 
   let res = 0;
@@ -18,13 +18,13 @@ const solve = (input: string, regex: RegExp): number => {
   for (const range of ranges) {
     for (let i = range.start; i <= range.end; i++) {
       const str = i.toString();
-      if(str.length % 2 !== 0) continue;
-      res += regex.test(str) ? i : 0      
+      if (str.length % 2 !== 0) continue;
+      res += regex.test(str) ? i : 0;
     }
   }
 
   return res;
-}
+};
 
 const regexTask1 = /^(.+)\1$/;
 const regexTask2 = /^(.+)\1+$/;
